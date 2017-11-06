@@ -3,8 +3,8 @@ import numpy as np
 
 
 #function to apply phi function
-def apply_phi(X, func):
-	return [func(x) for x in X]
+def apply_phi(X, func, d):
+	return [func(x,d) for x in X]
 
 #function to calculate the best W to the model normal
 def fit_linear_regretion(X_in, y_in):
@@ -19,8 +19,7 @@ def apply_w(X, phi, w):
 
 
 #generate phi function
-d=5
-phi = lambda x: [1] + np.matrix([ np.power(x,i+1) for i in range(d)]).flatten().tolist()[0]
+phi = lambda x, d: [1] + np.matrix([ np.power(x,i+1) for i in range(d)]).flatten().tolist()[0]
 
 
 # *** item 1 ***
@@ -32,7 +31,7 @@ X_test = test['carga'].as_matrix()
 y_test = test['vo2max'].as_matrix()
 
 # caculate the values of w
-w = fit_linear_regretion(apply_phi(X, phi), y)
+w = fit_linear_regretion(apply_phi(X, phi, 5), y)
 
 print("w: ",w)
 
