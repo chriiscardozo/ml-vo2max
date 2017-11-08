@@ -2,6 +2,7 @@ from read_data import train, test, mask
 import numpy as np
 import matplotlib.pyplot as plt
 from Regression import Regression
+from ACSM import ACSM
 import itertools
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -50,6 +51,7 @@ y_test = test['vo2max'].as_matrix()
 degress = [1, 2, 3]
 for d in degress:
 	model = Regression(degree=d)
+	# model.phi_inter = lambda X,d: [[1] + [x[0] , x[1], x[0]*x[1], x[0]**2, x[1]**2, x[0]*x[1]**2, x[1]*x[0]**2] for x in X]
 	W = model.fit(X, y)
 	
 	y_pred = model.predict(X_test)
@@ -93,3 +95,33 @@ for d in degress:
 	nll = model.NLL(X, y)
 
 	print("grau " + str(d) + ": \n\tW = " + str([str(round(x, 5)) for x in W]) + "\n\tmse_error = " + str(mse_error) + "\n\tscore = " + str(score) + "\n\tNLL = " + str(nll))
+
+# *** item 4 ***
+print("*** Item 4 ***")
+print("Usando X=[peso,carga] e y=[vo2max]")
+X = train[['peso','carga']].as_matrix()
+y = train['vo2max'].as_matrix()
+
+X_test = test[['peso','carga']].as_matrix()
+y_test = test['vo2max'].as_matrix()
+
+model = ACSM()
+
+y_pred = model.predict(X_test)
+mse_error = model.mse_error(y_test, y_pred)
+score = model.score(y_test, y_pred)
+
+print("grau " + str(d) + ": \n\tmse_error = " + str(mse_error) + "\n\tscore = " + str(score))
+
+plt3d = plt.figure().gca(projection='3d')
+x1_plot = np.linspace(X[:,0].min(),X[:,0].max(),10)
+x2_plot = np.linspace(X[:,1].min(),X[:,1].max(),10)
+
+xx, yy = np.meshgrid(x1_plot, x2_plot)
+z = list(itertools.product(x1_plot, x2_plot))
+zz = model.predict(z)
+zz = np.reshape(zz, (x2_plot.shape[0], x1_plot.shape[0]))
+
+plt3d.plot_surface(xx,yy,zz.transpose())
+plt3d.plot(X[:,0],X[:,1],y, 'g.')
+plt.show()

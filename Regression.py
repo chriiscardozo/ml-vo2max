@@ -5,9 +5,10 @@ class Regression:
 	def __init__(self, degree=1):
 		self.W = None
 		self.degree = degree
+		self.phi_inter = lambda X, d: [[1] + np.asarray([[np.power(v, p+1) for p in range(d)] for v in x]).flatten().tolist() for x in X]
 
 	def _phi(self, X, d):
-		return [[1] + np.asarray([[np.power(v, p+1) for p in range(d)] for v in x]).flatten().tolist() for x in X]
+		return self.phi_inter(X,d)
 
 	def fit(self, X, y):
 		_X = self._phi(X, self.degree)
