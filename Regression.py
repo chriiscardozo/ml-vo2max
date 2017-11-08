@@ -35,6 +35,24 @@ class Regression:
 		soma_quadrados = ((np.array(y_true) - np.array(media_y_true)) ** 2).sum()
 		return 1 - (residual/soma_quadrados)
 
+	def NLL(self, X, y):
+		if(self.W is None):
+			raise Exception('W value not initilized. Use fit before predict.')
+		else:
+			X_phi = self._phi(X, self.degree)
+
+			print(len(X_phi))
+
+			W_T = np.transpose(self.W)
+			X_T = np.transpose(X_phi)
+			y_T = np.transpose(y)
+
+			term_1 = np.dot(np.dot(np.dot(W_T, X_T), X_phi), self.W)/2.0
+			term_2 = np.dot(np.dot(W_T, X_T), y)
+			term_3 = np.dot(y_T, y)/2.0
+
+			return term_1 - term_2 + term_3
+
 # exemplo
 def main():
 	X = [[0.5],[0.3],[0.4],[0.45],[0.25]]

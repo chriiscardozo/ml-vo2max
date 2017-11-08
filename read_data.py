@@ -13,7 +13,6 @@ with open(file_name) as f:
 
 dataset = pd.DataFrame(data=data, columns=['idade','peso','carga','vo2max'])
 
-
 cut = 1000
 mask = [1]*cut + [0]*(len(data)-cut)
 random.seed(42)
