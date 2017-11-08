@@ -25,7 +25,7 @@ class Regression:
 		else:
 			return np.transpose(np.dot(self.W, np.transpose(_X)))
 
-	def error_mse(self, y_true, y_pred):
+	def mse_error(self, y_true, y_pred):
 		return ((np.array(y_true) - np.array(y_pred)) ** 2).sum() / len(y_true)
 
 	def score(self, y_true, y_pred):
