@@ -43,8 +43,6 @@ ax.set_ylabel('vo2max')
 ax.set_zlabel('pdf')
 plt.show()
 
-print(rv.pdf([170,30]))
-
 # *** item 2 ***
 print("*** item 2 ***")
 print("Usando X=[peso,carga,vo2max]")
