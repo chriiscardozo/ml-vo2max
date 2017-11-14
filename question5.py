@@ -40,7 +40,7 @@ def get_gabarito_esperado():
 	return [c_1, c_2, c_3]
 
 def get_gaussiana_cluster(data, n):
-	clf = GaussianMixture(n)
+	clf = GaussianMixture(n, init_params='random')
 
 	clf.fit(data)
 	y_pred = clf.predict(data)
@@ -67,4 +67,5 @@ for n in range(2, 5):
 	print("Medias: ", clf.means_)
 	print("Covariancias: ", clf.covariances_)
 	print("Aprioris:", clf.weights_)
+	print("Negative Log-likelihood:", clf.lower_bound_)
 	plot_result(result, 'Clusters EM: K = ' + str(n))
