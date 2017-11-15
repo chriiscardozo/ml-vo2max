@@ -54,6 +54,7 @@ y_pred = modelo.predict(X_test)
 
 print("\tmse:", modelo.mse_error(y_test, y_pred))
 print("\tscore:", modelo.score(y_test, y_pred))
+print("\tw:", [str(round(x, 3)) for x in modelo.W])
 
 # *** MODELO REGRESSÃO D=2 DEPENDENCIA X*Y ***
 print("Regressão 2 (com dep)")
@@ -64,7 +65,7 @@ y_pred = modelo.predict(X_test)
 
 print("\tmse:", modelo.mse_error(y_test, y_pred))
 print("\tscore:", modelo.score(y_test, y_pred))
-
+print("\tw:", [str(round(x, 3)) for x in modelo.W])
 
 X, y, X_test, y_test = carregar_dataset(['peso','carga','idade'], 'vo2max')
 
@@ -77,6 +78,7 @@ y_pred = modelo.predict(X_test)
 
 print("\tmse:", modelo.mse_error(y_test, y_pred))
 print("\tscore:", modelo.score(y_test, y_pred))
+print("\tw:", [str(round(x, 3)) for x in modelo.W])
 
 X, y, X_test, y_test = carregar_dataset(['peso','carga','idade', 'vo2max'], 'vo2max')
 
