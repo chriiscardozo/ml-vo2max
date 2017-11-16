@@ -35,6 +35,7 @@ def carregar_dataset(X_fields, y_field):
 
 	return [X, y, X_test, y_test]
 
+# *** item 1 ***
 
 # *** MODELO ACSM ***
 X, y, X_test, y_test = carregar_dataset(['peso','carga'], 'vo2max')
@@ -63,3 +64,17 @@ print("\tVO2MAX - Media:", mu_k)
 print("\tCov Mat:\n", cov_matrix)
 print("\tmse:", mse_error(y_test, y_pred))
 print("\tscore:", score(y_test, y_pred))
+
+
+# *** item 2 ***
+vo2 = 32.6
+carg = 181
+pes = 81.5
+inits = [40, 50, 60]
+ends = [50, 60, 70]
+
+for i in range(len(inits)):
+	prob = 0.0
+	for v in np.linspace(inits[i], ends[i], 10000):
+		prob += rv.pdf([pes,carg,v,vo2])
+	print("prob(",inits[i],ends[i],") =", round(prob, 5))
