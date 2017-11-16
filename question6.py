@@ -65,8 +65,22 @@ print("\tCov Mat:\n", cov_matrix)
 print("\tmse:", mse_error(y_test, y_pred))
 print("\tscore:", score(y_test, y_pred))
 
+# *** item 3 ***
+print("*** item 3 ***")
+inits_idade = [30,50]
+ends_idade = [40,60]
+vo2s = [30, 20]
+for i in range(len(inits_idade)):
+	prob = 0.0
+	for v_idade in np.linspace(inits_idade[i], ends_idade[i], 50):
+		for v_peso in np.linspace(40, 180, 100):
+			for v_carga in np.linspace(0, 500, 500):
+				prob += rv.pdf([v_peso,v_carga,v_idade,vo2s[i]])
+	print("\t(vo2max =",vo2s[i],") prob(",inits_idade[i],ends_idade[i],") =", round(prob, 5))
 
-# *** item 2 ***
+
+# *** item 4 ***
+print("*** item 4 ***")
 vo2 = 32.6
 carg = 181
 pes = 81.5
