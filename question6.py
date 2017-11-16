@@ -70,13 +70,14 @@ print("*** item 3 ***")
 inits_idade = [30,50]
 ends_idade = [40,60]
 vo2s = [30, 20]
-for i in range(len(inits_idade)):
-	prob = 0.0
-	for v_idade in np.linspace(inits_idade[i], ends_idade[i], 50):
-		for v_peso in np.linspace(40, 180, 100):
-			for v_carga in np.linspace(0, 500, 500):
-				prob += rv.pdf([v_peso,v_carga,v_idade,vo2s[i]])
-	print("\t(vo2max =",vo2s[i],") prob(",inits_idade[i],ends_idade[i],") =", round(prob, 5))
+for v in vo2s:
+	for i in range(len(inits_idade)):
+		prob = 0.0
+		for v_idade in np.linspace(inits_idade[i], ends_idade[i], 50):
+			for v_peso in np.linspace(40, 180, 100):
+				for v_carga in np.linspace(0, 500, 500):
+					prob += rv.pdf([v_peso,v_carga,v_idade,v])
+		print("\t(vo2max =",v,") prob(",inits_idade[i],ends_idade[i],") =", round(prob, 5))
 
 
 # *** item 4 ***
